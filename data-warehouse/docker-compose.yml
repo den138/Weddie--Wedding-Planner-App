@@ -1,0 +1,104 @@
+version: "2"
+
+services:
+  spark:
+    image: docker.io/bitnami/spark
+    user: root
+    networks:
+      dae:
+        ipv4_address: 172.1.0.2
+    environment:
+      - SPARK_MODE=master
+      - SPARK_RPC_AUTHENTICATION_ENABLED=no
+      - SPARK_RPC_ENCRYPTION_ENABLED=no
+      - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no
+      - SPARK_SSL_ENABLED=no
+      - RDS_DB=${RDS_DB}
+      - RDS_USERNAME=${RDS_USERNAME}
+      - RDS_PASSWORD=${RDS_PASSWORD}
+      - RDS_HOST=final-project-data-warehouse.cit8sojr7959.ap-southeast-1.rds.amazonaws.com
+      - PYTHONIOENCODING=utf8
+
+    ports:
+      - "8081:8080"
+      - "7077:7077"
+    volumes:
+      - ${SPARK_APP}:/opt/bitnami/spark/app
+      - /tmp/streaming:/tmp/streaming
+  spark-worker-1:
+    image: docker.io/bitnami/spark
+    user: root
+    networks:
+      dae:
+        ipv4_address: 172.1.0.3
+    depends_on:
+      - spark
+    environment:
+      - SPARK_MODE=worker
+      - SPARK_MASTER_URL=spark://spark:7077
+      - SPARK_WORKER_MEMORY=1G
+      - SPARK_WORKER_CORES=1
+      - SPARK_RPC_AUTHENTICATION_ENABLED=no
+      - SPARK_RPC_ENCRYPTION_ENABLED=no
+      - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no
+      - SPARK_SSL_ENABLED=no
+    volumes:
+      - /tmp/streaming:/tmp/streaming
+
+  spark-worker-2:
+    image: docker.io/bitnami/spark
+    user: root
+    networks:
+      dae:
+        ipv4_address: 172.1.0.4
+    environment:
+      - SPARK_MODE=worker
+      - SPARK_MASTER_URL=spark://spark:7077
+      - SPARK_WORKER_MEMORY=1G
+      - SPARK_WORKER_CORES=1
+      - SPARK_RPC_AUTHENTICATION_ENABLED=no
+      - SPARK_RPC_ENCRYPTION_ENABLED=no
+      - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no
+      - SPARK_SSL_ENABLED=no
+
+  mongodb:
+    image: mongo
+    restart: always
+    networks:
+      dae:
+        ipv4_address: 172.1.0.10
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./mongodb/db:/data/db
+  postgres:
+    image: "postgres:13"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: wedding
+    restart: always
+    networks:
+      dae:
+        ipv4_address: 172.1.0.20
+    ports:
+      - "6432:5432"
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+
+  weddie:
+    image: weddie:latest
+    restart: always
+    networks:
+      dae:
+        ipv4_address: 172.1.0.30
+    ports:
+      - "8080:8080"
+
+networks:
+  dae:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.1.0.0/24

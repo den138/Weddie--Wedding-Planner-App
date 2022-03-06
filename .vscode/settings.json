@@ -1,0 +1,25 @@
+{
+  "cSpell.words": ["Ionicons", "itin"],
+  "sqltools.connections": [
+    {
+      "previewLimit": 50,
+      "server": "final-project-data-warehouse.cit8sojr7959.ap-southeast-1.rds.amazonaws.com",
+      "port": 5432,
+      "driver": "PostgreSQL",
+      "name": "datawarehouse",
+      "database": "wedding",
+      "username": "postgres",
+      "password": "postgres"
+    },
+    {
+      "previewLimit": 50,
+      "server": "localhost",
+      "port": 6432,
+      "driver": "PostgreSQL",
+      "name": "localhost",
+      "database": "wedding",
+      "username": "postgres",
+      "password": "postgres"
+    }
+  ]
+}

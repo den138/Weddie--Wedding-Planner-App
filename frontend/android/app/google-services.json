@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "606057435380",
+    "project_id": "weddie-6184c",
+    "storage_bucket": "weddie-6184c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:606057435380:android:4fc732f9e0b6c2a003cea1",
+        "android_client_info": {
+          "package_name": "com.weddie"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "606057435380-mn67s3c9tctnp7tmk9p9qiccfa5pq169.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBbUJeZEi1A1RwFFpkTobnkg98Zo7KGjxo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "606057435380-mn67s3c9tctnp7tmk9p9qiccfa5pq169.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "606057435380-h81f5to0js2fbn8ehd6bk3laha1b36l8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.weddie"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,9 @@
+.DS_Store
+.env
+weddie.session.sql
+node_modules
+jupyter
+mongodb.session.
+pgdata
+yarn-error.log
+mongodb
