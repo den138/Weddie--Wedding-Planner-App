@@ -1,3 +1,7 @@
+# The final project conducted by Billy, Matt, Dennis in Tecky Academy cohort 17
+
+---
+
 ## What should you do after git pull this project
 
 `brew install watchman` (if you have not downloaded watchman)
